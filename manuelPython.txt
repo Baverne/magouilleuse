@@ -1,0 +1,17 @@
+Programme installé : python
+Module nécéssaire  : munkres
+
+Commande de base :
+./Mag/MagApp.py < input.txt > resultat.txt
+
+FORMATTAGE ENTREE/SORTIE
+INPUT MagApp.py
+[Séparés par un retour à la ligne]
+
+	1. Liste des candidats      identifiantUser
+	2. Liste des postes         identifiantPoste [espace] nbPlaces
+	3. Liste des voeux          identifiantUser [espace] voeu1 [espace | = si indifférent] voeu2 [espace | = si indifférent] ...
+	4. Liste des inaptitudes    identifiantUser [espace] identifiantPoste1 [espace] identifiantPoste2
+
+OUTPUT MagApp.py
+	Liste des affectactions		identifiantUser [espace] identifiantPoste
