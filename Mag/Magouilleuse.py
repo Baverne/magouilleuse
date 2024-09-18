@@ -31,7 +31,7 @@ class Magouilleuse :
 		i = 0
 		j = 0
 		for e in iterable :
-			for x in xrange( iterable[e] ) :
+			for x in list(range( iterable[e] )) :
 				self.Slots[ i ] = e
 				i += 1
 
@@ -40,7 +40,7 @@ class Magouilleuse :
 
 			self.Capacity[ e ] = iterable[e]
 		
-			if not self.Popularity.has_key( e ) :
+			if not e in self.Popularity :
 				self.Popularity[ e ] = 0
 		
 		
@@ -83,13 +83,13 @@ class Magouilleuse :
 		#
 		for e in iterable :
 			# Checking guy validity
-			if not self.PeopleIndexes.has_key( e ) :
+			if not e in self.PeopleIndexes :
 				raise MagouilleuseException( "Whish "+ str( (e, iterable[e]) ) +" not in People." )
 			if not iterable[e] :
 				raise MagouilleuseException( "Empty wish list for " + e + "." )
 			# Checking the validity of each job.
 			for slot in iterable[e] :
-				if not self.SlotIndexes.has_key( slot ):
+				if not slot in self.SlotIndexes:
 					raise MagouilleuseException( "Whish "+ str( (e, iterable[e]) ) +" has slot "+ str(slot) + " not in Slots."  )
 			# Check if list complete :
 			for job in self.SlotIndexes :
@@ -105,7 +105,7 @@ class Magouilleuse :
 
 			self.Wishes[ e ] = iterable[e]
 			g = iterable[e][0]
-			if not self.Popularity.has_key( g ) :
+			if not g in self.Popularity :
 				self.Popularity[ g ] = 0
 			self.Popularity[ g ] += 1
 
@@ -147,7 +147,7 @@ class Magouilleuse :
 		if len( slot_collection ) < len( self.SlotIndexes ) :
 			if self.missing_wishes != "equalize" :
 				raise MagouilleuseException( "Unrecoverable wish missing in wishes : "+ slot_collection )
-			for x in xrange( len( self.SlotIndexes ) - len( slot_collection ) ) :
+			for x in list(range( len( self.SlotIndexes ) - len( slot_collection ) )) :
 				L.append( L[-1] ) 
 
 		return L
@@ -183,13 +183,15 @@ class Magouilleuse :
 			mixed_list.append( (e, cost_list[i]) ) 
 
 		# Sort it according to slot order.
-		mixed_list.sort( cmp = lambda e1,e2 : self.slots_order( e1[0], e2[0] ) )
+		print("mixed_list : ", mixed_list)
+		print( "self.SlotIndexes : ", self.SlotIndexes )
+		mixed_list.sort( key = lambda e1 : self.SlotIndexes[e1[0]] ) 
 		sorted_list = []
 
 		# Takes inabilities into account :
 		for slot, cost in mixed_list :
 			if joe in self.Inabilities and  slot in self.Inabilities[joe] :
-				sorted_list.append( (slot,sys.maxint) ) 
+				sorted_list.append( (slot,sys.maxsize) ) 
 
 			else :
 				sorted_list.append( (slot,cost) )
@@ -197,7 +199,7 @@ class Magouilleuse :
 		# Duplicates the entries according to the capacity of the slots.
 		duplicate_list = []
 		for slot, cost in sorted_list :
-			for j in xrange( self.Capacity[slot] ) :
+			for j in list(range( self.Capacity[slot] )) :
 				duplicate_list.append( cost )
 
 		
@@ -211,14 +213,14 @@ class Magouilleuse :
 
 
 	def getEveryoneLines(self) :
-		people_list = self.People.items()
+		people_list = list(self.People.items())
 
-		people_list.sort( cmp=lambda x,y : x[0] - y[0] )
+		people_list.sort(key = lambda x : x[0])
 	
 		Matrix = []
 		for people_id, people in people_list :
 			if people.startswith("Nobody") :
-				Matrix.append( [ 0 for x in xrange( len( self.Slots ) ) ] )
+				Matrix.append( [ 0 for x in list(range( len( self.Slots ) )) ] )
 				continue
 			Matrix.append( self.getJoesLine( people, self.Wishes[people] ) )
 	
@@ -226,10 +228,10 @@ class Magouilleuse :
 			raise MagouilleuseException("Too many candidates !!!" )
 
 		if len(Matrix) < len ( Matrix[0] ) :
-			for x in xrange ( len(Matrix[0] ) - len( Matrix ) ) :
+			for x in list(range ( len(Matrix[0] ) - len( Matrix )) ) :
 				self.addNobody(x)
 				Matrix.append( 
-					[ 0 for x in xrange( len( self.Slots ) ) ]
+					[ 0 for x in list(range( len( self.Slots ) )) ]
 					)
 
 		return Matrix
@@ -250,7 +252,7 @@ class Magouilleuse :
 			
 			for equalChoices in L :
 				
-				miniCost = sys.maxint
+				miniCost = sys.maxsize
 				
 				if not equalChoices :
 					raise MagouilleuseException( "Empty equality list")

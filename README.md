@@ -9,7 +9,7 @@ Boris
 PS : dis moi quand tu veux me voir pour la sécurité.
 PS2 : Le mail en question
 Petite description :
-Utilisation : ./MagApp.py < test.txt
+Utilisation : python MagApp.py test.txt
 Format du fichier :
 Consulter les exemples. Dans les grandes lignes :
 * Une ligne par candidat, un seul mot pour son nom.

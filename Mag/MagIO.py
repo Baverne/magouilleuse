@@ -10,7 +10,7 @@
 # Person Wish1 Wish2...
 # End with dot
 # Incapacities :
-# Person Slot1 Slot2...
+# Person Slot1 Slot2...²
 
 from Magouilleuse import MagouilleuseException
 
@@ -124,6 +124,7 @@ class MagIO :
 
 
 	def readLine ( self, line ) :
+		print("readLine")
 		if self.reading_people:
 			self.readPeople( line )
 		elif self.reading_slots:
@@ -135,13 +136,16 @@ class MagIO :
 
 	def readLines ( self ) :
 		oneSeen = False
-		for line in self.sin.xreadlines( ) :
+		print("readLines")
+		for line in self.sin :
+			print(line)
 			if not oneSeen and not line.split() :
 				continue
 			else :
 				oneSeen = True
 
 			self.readLine( line )
+		print("readLines done")
 
 
 	def getPeopleSlotsWishesIncapacitiesEqualities ( self ) :

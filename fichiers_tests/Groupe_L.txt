@@ -1,0 +1,28 @@
+Anais
+Clea
+Eliott
+Ismael
+Jeanne 
+Maxime
+Noe
+Solal
+Yang
+
+trois_cent_soixante 1
+anamorphique 1
+steadycam 2
+grande_vitesse 1
+lumiere_mobile 1
+fond_vert 1
+changement_lumiere 1
+flou_net 1
+
+Anais fond_vert trois_cent_soixante steadycam grande_vitesse=lumiere_mobile changement_lumiere flou_net anamorphique
+Clea grande_vitesse fond_vert lumiere_mobile trois_cent_soixante steadycam changement_lumiere anamorphique flou_net
+Eliott grande_vitesse lumiere_mobile changement_lumiere trois_cent_soixante steadycam fond_vert anamorphique flou_net
+Ismael trois_cent_soixante anamorphique steadycam grande_vitesse lumiere_mobile changement_lumiere flou_net fond_vert
+Jeanne changement_lumiere flou_net=steadycam grande_vitesse lumiere_mobile fond_vert trois_cent_soixante anamorphique
+Maxime lumiere_mobile=changement_lumiere trois_cent_soixante=steadycam grande_vitesse anamorphique fond_vert flou_net
+Noe grande_vitesse lumiere_mobile fond_vert trois_cent_soixante anamorphique steadycam changement_lumiere flou_net
+Solal anamorphique steadycam=grande_vitesse changement_lumiere lumiere_mobile fond_vert trois_cent_soixante flou_net
+Yang trois_cent_soixante steadycam grande_vitesse lumiere_mobile fond_vert changement_lumiere flou_net anamorphique
